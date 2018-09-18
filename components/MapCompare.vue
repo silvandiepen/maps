@@ -2,7 +2,8 @@
 
 	<div class="map-compare">
 		<div class="map-compare__slider">
-			<h1 class="map-compare__title">Map Comparer</h1>
+			<h1 class="map-compare__title">
+				<strong>Map</strong>Compare</h1>
 			<h4 class="slider__title hide-for-medium-up">Daily requests</h4>
 			<div class="slider">
 				<h5 class="slider__title hide-for-small-only">Daily requests</h5>
@@ -13,11 +14,11 @@
 						<span class="slider__current">{{views.current}}</span>
 					</div>
 				</div>
-				<span class=" slider__till ">{{views.max}}</span>
+				<span class="slider__till">{{views.max}}</span>
 			</div>
 		</div>
-		<transition-group name="list" tag="div" class="map-compare__providers">
-			<div class="map-compare__provider provider" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}">
+		<transition-group tag="ul" name="flip-list" class="list map-compare__providers">
+			<li class="map-compare__provider provider list-item" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}">
 				<div class="provider__title">
 					<h3>{{provider.name}}</h3>
 				</div>
@@ -25,8 +26,9 @@
 					<h4 v-if="calcPrice(provider) > 0">$ {{calcPrice(provider) }}</h4>
 					<h4 v-else>free</h4>
 				</div>
-			</div>
+			</li>
 		</transition-group>
+
 	</div>
 </template>
 
@@ -77,15 +79,17 @@ export default {
 						{ price: 0.16, limit: 100000, per: 1000 }
 					]
 				}
-			]
+			],
+			orderedProviders: []
 		};
 	},
-	computed: {
-		orderedProviders: function() {
-			return _.orderBy(this.providers, 'currentPrice');
-		}
+	mounted() {
+		this.orderProviders();
 	},
 	methods: {
+		orderProviders() {
+			this.orderedProviders = _.orderBy(this.providers, 'currentPrice');
+		},
 		calcPrice(provider) {
 			let _this = this;
 			let price = 0;
@@ -99,8 +103,16 @@ export default {
 				price = 0;
 			}
 			provider.currentPrice = price;
-
 			return Math.round(price * 100) / 100;
+		}
+	},
+
+	watch: {
+		views: {
+			handler: function(value) {
+				this.orderProviders();
+			},
+			deep: true
 		}
 	}
 };
@@ -109,6 +121,7 @@ export default {
 <style lang="scss">
 @import './assets/scss/vars';
 @import '~piet';
+
 .hide-for-small-only {
 	@media #{$small-only} {
 		display: none;
@@ -119,7 +132,15 @@ export default {
 		display: none;
 	}
 }
-.list-move {
+.testlist {
+	display: flex;
+	flex-direction: column;
+	li {
+		display: inline-block;
+	}
+}
+/** demo11 **/
+.flip-list-move {
 	transition: transform 1s;
 }
 .map-compare {
@@ -134,27 +155,44 @@ export default {
 		padding: 0 30px 30px 30px;
 	}
 	&__title {
+		color: color(Pink);
+		strong {
+			color: color(Black);
+		}
 		@media #{$small-only} {
 			background-color: color(Black);
 			width: calc(100% + 60px);
 			margin-left: -30px;
 			color: color(White);
 			padding: 2rem;
+			color: color(Pink);
+			strong {
+				color: color(White);
+			}
 		}
 	}
 	&__slider {
 	}
 	&__providers {
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
+		width: 100%;
+		// display: flex;
+		// flex-wrap: wrap;
+		// flex-direction: column;
 		counter-reset: provider;
 	}
 	&__provider {
+		// @for $i from 1 through 10 {
+		// 	&:nth-child(#{$i}) {
+		// 		transition: transform 0.3s;
+		// 		transform: translateY($i * 100px);
+		// 	}
+		// }
+		width: 100%;
 		counter-increment: provider;
 		position: relative;
+
 		padding: 2rem;
-		display: flex;
+		// display: inline-block;
 		background-color: color(White, 1);
 		transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 		background-size: 100% 200%;
@@ -189,16 +227,16 @@ export default {
 			content: counter(provider);
 			box-shadow: 0 0.5rem 1rem 0 color(Black, 0.1);
 		}
-		&--free {
-			background-color: color(White, 1);
-			box-shadow: 0 -4px 0 0 color(lightGreen) inset,
-				0 0.5rem 1rem 0 color(Black, 0.1);
-			background-position: 0% 0;
-			&:before {
-				background-color: color(lightGreen);
-				border-bottom: 2px solid darken(lightGreen, 15%);
-			}
-		}
+		// &--free {
+		// 	background-color: color(White, 1);
+		// 	box-shadow: 0 -4px 0 0 color(lightGreen) inset,
+		// 		0 0.5rem 1rem 0 color(Black, 0.1);
+		// 	background-position: 0% 0;
+		// 	&:before {
+		// 		background-color: color(lightGreen);
+		// 		border-bottom: 2px solid darken(lightGreen, 15%);
+		// 	}
+		// }
 	}
 }
 .provider {
