@@ -40,6 +40,7 @@ export default {
 .page {
 	filter: blur(0px);
 	opacity: 1;
+	transition: filter 0.4s, opacity 0.4s;
 	&.fadeOut {
 		opacity: 0.5;
 		filter: blur(20px);
