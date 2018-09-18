@@ -2,7 +2,7 @@
 
 	<div class="map-compare">
 		<div class="map-compare__slider">
-			<h1>Map Comparer</h1>
+			<h1 class="map-compare__title">Map Comparer</h1>
 			<h4 class="slider__title hide-for-medium-up">Daily requests</h4>
 			<div class="slider">
 				<h5 class="slider__title hide-for-small-only">Daily requests</h5>
@@ -125,8 +125,23 @@ export default {
 .map-compare {
 	width: 640px;
 	max-width: 80vw;
-	padding-top: 10vh;
+	padding: 10vh 30px 30px 30px;
+	overflow: hidden;
 	margin: auto;
+	@media #{$small-only} {
+		padding-top: 0;
+		max-width: 100vw;
+		padding: 0 30px 30px 30px;
+	}
+	&__title {
+		@media #{$small-only} {
+			background-color: color(Black);
+			width: calc(100% + 60px);
+			margin-left: -30px;
+			color: color(White);
+			padding: 2rem;
+		}
+	}
 	&__slider {
 	}
 	&__providers {
