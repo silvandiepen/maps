@@ -8,3 +8,10 @@ $output: set-output(css, true);
 @import '~piet';
 
 @import 'typography/index';
+
+html {
+  background-color: black;
+}
+body {
+  background-color: color(Offwhite);
+}
