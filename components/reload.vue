@@ -12,8 +12,8 @@ export default {
 	mounted() {
 		let _this = this;
 		if (process.browser) {
+			let timer;
 			window.addEventListener('scroll', function(e) {
-				let timer;
 				if (window.scrollY < 0) {
 					_this.scrolling = true;
 					timer = setTimeout(function() {
