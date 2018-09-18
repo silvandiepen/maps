@@ -1,53 +1,51 @@
 <template>
-  <div>
-    <nuxt/>
-  </div>
+	<div class="layout">
+		<div class="reload"></div>
+		<nuxt/>
+	</div>
 </template>
 
-<style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+<style lang="scss">
+@import './assets/scss/vars';
+@import '~piet';
+.reload {
+	width: 100px;
+	height: 100px;
+	position: fixed;
+	left: 50%;
+	top: 0;
+	transform: translateX(-50%);
+	&:before {
+		content: '';
+		width: 50%;
+		height: 50%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(0deg);
+		display: block;
+		border: 2px solid #7f7f7f;
+		border-radius: 50%;
+		border-bottom: 2px solid color(Pink);
+		border-top: 2px solid color(lightBlue);
+		border-left: 2px solid color(lightGreen);
+		animation: rotating 1s linear infinite;
+	}
 }
-
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
+@keyframes rotating {
+	from {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.layout {
+	overflow: visible;
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.page {
+	position: relative;
+	z-index: 1;
 }
 </style>
 

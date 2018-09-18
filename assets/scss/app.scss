@@ -9,9 +9,11 @@ $output: set-output(css, true);
 
 @import 'typography/index';
 
-html {
+html,
+body {
   background-color: black;
 }
-body {
+.page {
+  min-height: 100vh;
   background-color: color(Offwhite);
 }
