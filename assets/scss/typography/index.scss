@@ -1,0 +1,6 @@
+@import 'sizes';
+@import 'rules';
+
+h1 {
+  @extend %h1;
+}
