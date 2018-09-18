@@ -1,17 +1,29 @@
 <template>
-	<div class="reload"></div>
+	<div class="reload" :class="{'reload--active' : scrolling, 'reload--reload' : reloading}"></div>
 </template>
 <script>
 export default {
+	data() {
+		return {
+			reloading: false,
+			scrolling: false
+		};
+	},
 	mounted() {
+		let _this = this;
 		if (process.browser) {
 			window.addEventListener('scroll', function(e) {
 				let timer;
 				if (window.scrollY < 0) {
+					_this.scrolling = true;
 					timer = setTimeout(function() {
-						location.reload();
-					}, 1000);
+						_this.reloading = true;
+						setTimeout(function() {
+							location.reload();
+						}, 500);
+					}, 2000);
 				} else {
+					_this.scrolling = false;
 					clearTimeout(timer);
 				}
 			});
@@ -37,22 +49,43 @@ export default {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%) rotate(0deg);
+		transform: scale(0) translate(-50%, -50%) rotate(0deg);
 		display: block;
+		transition: transform 0.3s;
 		border: 2px solid #7f7f7f;
 		border-radius: 50%;
 		border-bottom: 2px solid color(Pink);
 		border-top: 2px solid color(lightBlue);
 		border-left: 2px solid color(lightGreen);
-		animation: rotating 1s linear infinite;
+	}
+	&--active {
+		&:before {
+			transform: scale(1) translate(-50%, -50%) rotate(0deg);
+			animation: rotating 1s 0.3s linear infinite;
+		}
+	}
+	&--reload {
+		&:before {
+			animation: reload 0.3s ease-in-out once;
+		}
 	}
 }
 @keyframes rotating {
 	from {
-		transform: translate(-50%, -50%) rotate(0deg);
+		transform: scale(1) translate(-50%, -50%) rotate(0deg);
 	}
 	to {
-		transform: translate(-50%, -50%) rotate(360deg);
+		transform: scale(1) translate(-50%, -50%) rotate(360deg);
+	}
+}
+@keyframes reload {
+	from {
+		opacity: 1;
+		transform: scale(1) translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		opacity: 0;
+		transform: scale(2) translate(-50%, -50%) rotate(0deg);
 	}
 }
 </style>
