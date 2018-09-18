@@ -3,8 +3,9 @@
 	<div class="map-compare">
 		<div class="map-compare__slider">
 			<h1>Map Comparer</h1>
+			<h4 class="slider__title hide-for-medium-up">Daily requests</h4>
 			<div class="slider">
-				<h5 class="slider__title">Daily requests</h5>
+				<h5 class="slider__title hide-for-small-only">Daily requests</h5>
 				<span class="slider__from">{{views.min}}</span>
 				<div class="slider__range input--range" :style="`--current: ${views.current / views.max * 100} `">
 					<input type="range" v-model="views.current" :min="views.min" :max="views.max" :step="views.step" />
@@ -108,7 +109,16 @@ export default {
 <style lang="scss">
 @import './assets/scss/vars';
 @import '~piet';
-
+.hide-for-small-only {
+	@media #{$small-only} {
+		display: none;
+	}
+}
+.hide-for-medium-up {
+	@media #{$medium-up} {
+		display: none;
+	}
+}
 .list-move {
 	transition: transform 1s;
 }
@@ -187,6 +197,10 @@ export default {
 	display: flex;
 	position: relative;
 	z-index: 10;
+	@media #{$small-only} {
+		width: calc(100% + 2rem);
+		margin-left: -1rem;
+	}
 	&__title {
 		flex-shrink: 0;
 		padding: 1rem 1rem 1rem 0;
