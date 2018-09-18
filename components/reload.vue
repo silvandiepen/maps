@@ -18,6 +18,7 @@ export default {
 					_this.scrolling = true;
 					timer = setTimeout(function() {
 						_this.reloading = true;
+						document.querySelector('.page').classList.add('fadeOut');
 						setTimeout(function() {
 							location.reload();
 						}, 500);
@@ -35,6 +36,15 @@ export default {
 <style lang="scss">
 @import './assets/scss/vars';
 @import '~piet';
+
+.page {
+	filter: blur(0px);
+	opacity: 1;
+	&.fadeOut {
+		opacity: 0.5;
+		filter: blur(20px);
+	}
+}
 .reload {
 	width: 100px;
 	height: 100px;
