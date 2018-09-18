@@ -49,7 +49,7 @@ export default {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: scale(0) translate(-50%, -50%) rotate(0deg);
+		transform: translate(-50%, -50%) scale(0) rotate(0deg);
 		display: block;
 		transition: transform 0.3s;
 		border: 2px solid #7f7f7f;
@@ -60,7 +60,7 @@ export default {
 	}
 	&--active {
 		&:before {
-			transform: scale(1) translate(-50%, -50%) rotate(0deg);
+			transform: translate(-50%, -50%) scale(1) rotate(0deg);
 			animation: rotating 1s 0.3s linear infinite;
 		}
 	}
@@ -72,20 +72,20 @@ export default {
 }
 @keyframes rotating {
 	from {
-		transform: scale(1) translate(-50%, -50%) rotate(0deg);
+		transform: translate(-50%, -50%) scale(1) rotate(0deg);
 	}
 	to {
-		transform: scale(1) translate(-50%, -50%) rotate(360deg);
+		transform: translate(-50%, -50%) scale(1) rotate(360deg);
 	}
 }
 @keyframes reload {
 	from {
 		opacity: 1;
-		transform: scale(1) translate(-50%, -50%) rotate(0deg);
+		transform: translate(-50%, -50%) scale(1) rotate(0deg);
 	}
 	to {
 		opacity: 0;
-		transform: scale(2) translate(-50%, -50%) rotate(0deg);
+		transform: translate(-50%, -50%) scale(2) rotate(0deg);
 	}
 }
 </style>
