@@ -13,7 +13,17 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  modules: ['nuxt-rfg-icon', '@nuxtjs/manifest', '@nuxtjs/pwa'],
+  modules: [
+    'nuxt-rfg-icon',
+    '@nuxtjs/manifest',
+    '@nuxtjs/pwa',
+    {
+      icon: true,
+      mobileAppIOS: true,
+      nativeUi: true,
+      appleStatusBarStyle: 'black-translucent'
+    }
+  ],
   /*
   ** Customize the progress bar color
   */
