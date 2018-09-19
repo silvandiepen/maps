@@ -5,6 +5,8 @@
 export default {
 	data() {
 		return {
+			timeoutTimer: function() {},
+			timoutReload: function() {},
 			reloading: false,
 			scrolling: false
 		};
@@ -12,20 +14,21 @@ export default {
 	mounted() {
 		let _this = this;
 		if (process.browser) {
-			let timer;
 			window.addEventListener('scroll', function(e) {
-				if (window.scrollY < 0) {
+				if (window.scrollY < -100) {
 					_this.scrolling = true;
-					timer = setTimeout(function() {
+					timeoutTimer = setTimeout(() => {
 						_this.reloading = true;
 						document.querySelector('.page').classList.add('fadeOut');
-						setTimeout(function() {
-							location.reload();
-						}, 500);
+						// timoutReload = setTimeout(() => {
+						// 	location.reload();
+						// }, 500);
 					}, 2000);
 				} else {
 					_this.scrolling = false;
-					clearTimeout(timer);
+					console.log('clear timeout');
+					clearTimeout(_this.timeoutTimer);
+					clearTimeout(_this.timeoutReload);
 				}
 			});
 		}
@@ -39,10 +42,12 @@ export default {
 
 .page {
 	filter: blur(0px);
+	transform: scale(1);
 	opacity: 1;
-	transition: filter 0.4s, opacity 0.4s;
+	transition: filter 0.4s, opacity 0.4s, transform 0.4s;
 	&.fadeOut {
 		opacity: 0.5;
+		transform: scale(1.1);
 		filter: blur(20px);
 	}
 }
