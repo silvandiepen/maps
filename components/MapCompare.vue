@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<transition-group tag="ul" name="flip-list" class="list map-compare__providers">
-			<li class="map-compare__provider provider list-item" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}">
+			<li class="map-compare__provider provider list-item" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}"> {{views.current}} {{provider.free}}
 				<div class="provider__title">
 					<h3>{{provider.name}}</h3>
 				</div>
@@ -227,16 +227,16 @@ export default {
 			content: counter(provider);
 			box-shadow: 0 0.5rem 1rem 0 color(Black, 0.1);
 		}
-		// &--free {
-		// 	background-color: color(White, 1);
-		// 	box-shadow: 0 -4px 0 0 color(lightGreen) inset,
-		// 		0 0.5rem 1rem 0 color(Black, 0.1);
-		// 	background-position: 0% 0;
-		// 	&:before {
-		// 		background-color: color(lightGreen);
-		// 		border-bottom: 2px solid darken(lightGreen, 15%);
-		// 	}
-		// }
+		&--free {
+			background-color: color(White, 1);
+			box-shadow: 0 -4px 0 0 color(lightGreen) inset,
+				0 0.5rem 1rem 0 color(Black, 0.1);
+			background-position: 0% 0;
+			&:before {
+				background-color: color(lightGreen);
+				border-bottom: 2px solid darken(lightGreen, 15%);
+			}
+		}
 	}
 }
 .provider {
