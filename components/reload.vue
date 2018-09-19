@@ -20,10 +20,10 @@ export default {
 					timeoutTimer = setTimeout(() => {
 						_this.reloading = true;
 						document.querySelector('.page').classList.add('fadeOut');
-						// timoutReload = setTimeout(() => {
-						// 	location.reload();
-						// }, 500);
-					}, 2000);
+						timoutReload = setTimeout(() => {
+							location.reload();
+						}, 500);
+					}, 500);
 				} else {
 					_this.scrolling = false;
 					console.log('clear timeout');
