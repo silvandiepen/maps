@@ -143,6 +143,16 @@ export default {
 .flip-list-move {
 	transition: transform 1s;
 }
+@keyframes comeIn {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0%);
+		opacity: 1;
+	}
+}
 .map-compare {
 	width: 640px;
 	max-width: 80vw;
@@ -181,12 +191,12 @@ export default {
 		counter-reset: provider;
 	}
 	&__provider {
-		// @for $i from 1 through 10 {
-		// 	&:nth-child(#{$i}) {
-		// 		transition: transform 0.3s;
-		// 		transform: translateY($i * 100px);
-		// 	}
-		// }
+		transform: translateY(100%);
+		@for $i from 1 through 10 {
+			&:nth-child(#{$i}) {
+				animation: comeIn 0.3s #{$i/10}s cubic-bezier(0, 1.3, 1, 1.18) forwards;
+			}
+		}
 		width: 100%;
 		counter-increment: provider;
 		position: relative;
