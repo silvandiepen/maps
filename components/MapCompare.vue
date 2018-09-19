@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<transition-group tag="ul" name="flip-list" class="list map-compare__providers">
-			<li class="map-compare__provider provider list-item" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}"> {{views.current}} {{provider.free}}
+			<li class="map-compare__provider provider list-item" v-for="(provider,index) in orderedProviders" :key="index" :class="{'map-compare__provider--free': views.current < provider.free}">
 				<div class="provider__title">
 					<h3>{{provider.name}}</h3>
 				</div>

@@ -15,7 +15,13 @@ export default {
 		let _this = this;
 		if (process.browser) {
 			window.addEventListener('scroll', function(e) {
-				if (window.scrollY < -100) {
+				let triggerPoint = 0;
+				if (window.innerWidth < 750) {
+					triggerPoint = -100;
+				} else {
+					triggerPoint = -50;
+				}
+				if (window.scrollY < triggerPoint) {
 					_this.scrolling = true;
 					timeoutTimer = setTimeout(() => {
 						_this.reloading = true;
@@ -73,6 +79,15 @@ export default {
 		border-bottom: 2px solid color(Pink);
 		border-top: 2px solid color(lightBlue);
 		border-left: 2px solid color(lightGreen);
+	}
+	@media #{$large-up} {
+		width: 50px;
+		height: 50px;
+		margin-top: 10px;
+		&:before {
+			width: 100%;
+			height: 100%;
+		}
 	}
 	&--active {
 		&:before {
