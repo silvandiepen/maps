@@ -1,7 +1,7 @@
 {
   "name": "maps",
   "version": "1.0.0",
-  "description": "Maps pricing",
+  "description": "MapCompare",
   "author": "me@silvandiepen.com",
   "private": true,
   "scripts": {
