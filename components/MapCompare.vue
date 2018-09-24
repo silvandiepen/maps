@@ -72,8 +72,8 @@ export default {
 					free: 50000 / 30,
 					currentPrice: 0,
 					pricing: [
-						{ price: 1.77, limit: 150000, per: 1000 },
-						{ price: 0.53, limit: 1000000, per: 1000 }
+						{ price: 0.5, limit: 150000, per: 1000 },
+						{ price: 0.2, limit: 1000000, per: 1000 }
 					]
 				},
 				{
